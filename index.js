@@ -50,7 +50,13 @@ module.exports = function (obj, opts) {
             }
             else seen.push(node);
 
-            var keys = objectKeys(node).sort(cmp && cmp(node));
+            var keys = objectKeys(node);
+            var tmp = cmp && cmp(node);
+            if(tmp){
+                keys = keys.sort(tmp);
+            } else {
+                keys = keys.sort();
+            }
             var out = [];
             for (var i = 0; i < keys.length; i++) {
                 var key = keys[i];
